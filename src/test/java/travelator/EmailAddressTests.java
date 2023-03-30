@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class EmailAddressTests {
+class EmailAddressTests {
 
     @Test
-    public void parsing() {
+    void parsing() {
         assertEquals(
             new EmailAddress("fred", "example.com"),
             EmailAddress.parse("fred@example.com")
@@ -16,7 +16,7 @@ public class EmailAddressTests {
     }
 
     @Test
-    public void parsingFailures() {
+    void parsingFailures() {
         assertThrows(
             IllegalArgumentException.class,
             () -> EmailAddress.parse("@")
@@ -36,7 +36,7 @@ public class EmailAddressTests {
     }
 
     @Test
-    public void parsingWithAtInLocalPart() {
+    void parsingWithAtInLocalPart() {
         assertEquals(
             new EmailAddress("\"b@t\"", "example.com"),
             EmailAddress.parse("\"b@t\"@example.com")
