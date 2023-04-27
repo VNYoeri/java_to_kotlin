@@ -7,17 +7,14 @@ data class EmailAddress(
 
     override fun toString() = "$localPart@$domain"
 
-    companion object {
-        @JvmStatic
-        fun parse(value: String): EmailAddress {
-            val atIndex = value.lastIndexOf('@')
-            require(!(atIndex < 1 || atIndex == value.length - 1)) {
-                "EmailAddress must be two parts separated by @"
-            }
-            return EmailAddress(
-                value.substring(0, atIndex),
-                value.substring(atIndex + 1)
-            )
-        }
-    }
 }
+
+fun String.isValidEmail(): Boolean = IntRange(1, length - 2).contains(lastIndexOf('@'))
+
+fun parse(value: String): EmailAddress = emailAddress(value, value.lastIndexOf('@'))
+
+private fun emailAddress(value: String, atIndex: Int): EmailAddress =
+    when {
+        value.isValidEmail() -> EmailAddress(value.substring(0, atIndex), value.substring(atIndex + 1))
+        else -> throw IllegalArgumentException("EmailAddress must be two parts separated by @")
+    }

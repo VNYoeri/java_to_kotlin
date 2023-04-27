@@ -11,7 +11,7 @@ public class EmailAddressTests {
     public void parsing() {
         assertEquals(
             new EmailAddress("fred", "example.com"),
-            EmailAddress.parse("fred@example.com")
+            EmailAddressKt.parse("fred@example.com")
         );
     }
 
@@ -19,19 +19,19 @@ public class EmailAddressTests {
     public void parsingFailures() {
         assertThrows(
             IllegalArgumentException.class,
-            () -> EmailAddress.parse("@")
+            () -> EmailAddressKt.parse("@")
         );
         assertThrows(
             IllegalArgumentException.class,
-            () -> EmailAddress.parse("fred@")
+            () -> EmailAddressKt.parse("fred@")
         );
         assertThrows(
             IllegalArgumentException.class,
-            () -> EmailAddress.parse("@example.com")
+            () -> EmailAddressKt.parse("@example.com")
         );
         assertThrows(
             IllegalArgumentException.class,
-            () -> EmailAddress.parse("fred_at_example.com")
+            () -> EmailAddressKt.parse("fred_at_example.com")
         );
     }
 
@@ -39,7 +39,7 @@ public class EmailAddressTests {
     public void parsingWithAtInLocalPart() {
         assertEquals(
             new EmailAddress("\"b@t\"", "example.com"),
-            EmailAddress.parse("\"b@t\"@example.com")
+            EmailAddressKt.parse("\"b@t\"@example.com")
         );
     }
 }
